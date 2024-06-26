@@ -28,7 +28,7 @@ export default function Login({ navigation }) {
                 setEmail("")
                 setPassword("")
                 setErrorLogin(null)
-                navigation.navigate('Tabs');
+                navigation.navigate('Drawers');
             })
             .catch((error) => {
                 const errorCode = error.code;
