@@ -1,20 +1,29 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-
-import CreateUser from './src/screens/CreateUser';
-import Login from './src/screens/Login';
-import Disciplinas from './src/screens/Disciplinas';
-import CadastrarDisciplina from './src/screens/CadastrarDisciplina';
-import InfoDisciplina from './src/screens/InfoDisciplina';
-import Periodos from './src/screens/Periodos';
-import CadastrarPeriodo from './src/screens/CadastrarPeriodo';
-
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+//STACKS
+import CreateUser from './src/screens/CreateUser';
+import Login from './src/screens/Login';
+import CadastrarDisciplina from './src/screens/CadastrarDisciplina';
+import CadastrarPeriodo from './src/screens/CadastrarPeriodo';
+import CadastrarAula from './src/screens/CadastrarAula';
+//import CadastrarAtividade from './src/screens/CadastrarAtividade';
+
+//DRAWERS
+import Disciplinas from './src/screens/Disciplinas';
+import Periodos from './src/screens/Periodos';
+
+//TABS
+import InfoDisciplina from './src/screens/InfoDisciplina';
+import Aulas from './src/screens/Aulas'
+//import Atividades from './src/screens/Atividades';
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -39,6 +48,8 @@ export default function App() {
 
         <Stack.Screen name='CadastrarPeriodo' component={CadastrarPeriodo} options={{ headerShown: false }} />
 
+        <Stack.Screen name='CadastrarAula' component={CadastrarAula} options={{ headerShown: false }} />
+
         <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
 
         <Stack.Screen name="Drawers" component={Drawers} options={{ headerShown: false }} />
@@ -53,10 +64,10 @@ function Tabs() {
       screenOptions={{
         tabBarActiveTintColor: "#fff",
         tabBarInactiveTintColor: "#fff",
-        tabBarActiveBackgroundColor: '#4169E1',
+        tabBarActiveBackgroundColor: '#424242',
         tabBarShowLabel: true,
-        tabBarStyle: { backgroundColor: '#070A52' },
-        headerShown: true,
+        tabBarStyle: { backgroundColor: '#696969' },
+        headerShown: false,
         headerTintColor: '#FFF',
         headerTitleAlign: 'center',
         headerStyle: { backgroundColor: '#000' }
@@ -65,7 +76,16 @@ function Tabs() {
       <Tab.Screen name="InfoDisciplina" component={InfoDisciplina}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="car-back" color={color} size={32} />
+            <MaterialCommunityIcons name="inbox-full" color={color} size={32} />
+          ),
+          tabBarLabel: () => null
+        }}
+      />
+
+      <Tab.Screen name="Aulas" component={Aulas}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="google-classroom" color={color} size={32} />
           ),
           tabBarLabel: () => null
         }}

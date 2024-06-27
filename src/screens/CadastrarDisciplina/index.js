@@ -64,8 +64,8 @@ export default function CadastrarDisciplina({ navigation }) {
         for(let i=0; i<etapas.length; i++){
             set(push(ref(db, 'disciplinas/' + idUser + '/' + periodo + '/' + etapas[i].id)), {
                 disciplina: disciplina,
-                periodo: periodo,
-                image: urlImage
+                image: urlImage,
+                media: 0
             });
         }
         navigation.navigate('Drawers');

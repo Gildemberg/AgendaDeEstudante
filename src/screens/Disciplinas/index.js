@@ -135,10 +135,10 @@ export default function Disciplinas({ navigation }) {
                 showsHorizontalScrollIndicator={false}
                 data={disciplinas}
                 numColumns={2}
-                keyExtractor={(item) => item.id}
+                //keyExtractor={(item) => item.id}
 
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.disciplina}>
+                    <TouchableOpacity style={styles.disciplina} onPress={()=>navigation.navigate('Tabs', { screen: 'InfoDisciplina', params: { id: item.id, periodo: filtroPeriodo, etapa: filtroEtapa } })}>
                         <View style={styles.areaImagem}>
                             {item.image ? <Image source={{ uri: item.image }} style={styles.imagem} /> : null}
                         </View>
