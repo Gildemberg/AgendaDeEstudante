@@ -17,8 +17,10 @@ const auth = getAuth();
 
 export default function CadastrarDisciplina({ navigation }) {
     const [disciplina, setDisciplina] = useState("");
-    const [periodo, setPeriodo] = useState("");
     const [periodos, setPeriodos] = useState([]);
+    const [periodo, setPeriodo] = useState("");
+    const [etapas, setEtapas] = useState([]);
+
     const [idUser, setIdUser] = useState("");
     const [erro, setErro] = useState(null);
     const [image, setImage] = useState("");
@@ -59,11 +61,13 @@ export default function CadastrarDisciplina({ navigation }) {
     }
 
     const cadastrarDisciplina = () => {
-        set(push(ref(db, 'disciplinas/' + idUser)), {
-            disciplina: disciplina,
-            periodo: periodo,
-            image: urlImage
-        });
+        for(let i=0; i<etapas.length; i++){
+            set(push(ref(db, 'disciplinas/' + idUser + '/' + periodo + '/' + etapas[i].id)), {
+                disciplina: disciplina,
+                periodo: periodo,
+                image: urlImage
+            });
+        }
         navigation.navigate('Drawers');
     }
 
@@ -104,37 +108,53 @@ export default function CadastrarDisciplina({ navigation }) {
         }
     };
 
+    
+    useEffect(() => {
+        onValue(query(ref(db, 'periodos/' + idUser + '/' + periodo)), (snapshot) => {
+            let etapass = []
+            snapshot.forEach((data) => {
+                etapass.push({ id: data.key });
+            })
+            etapass = etapass.slice(0, etapass.length - 1);
+            setEtapas(etapass);
+        })
+    }, [periodo])
+
     return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>CADASTRO DE DISCIPLINA</Text>
+            <View style={styles.content}>
+                <Text style={styles.titulo}>CADASTRO DE DISCIPLINA</Text>
 
-            {erro != null && (<Text style={styles.alert}>{erro}</Text>)}
+                {erro != null && (<Text style={styles.alert}>{erro}</Text>)}
 
-            <Text style={styles.tituloInput}>Disciplina:</Text>
-            <TextInput style={styles.input} value={disciplina} onChangeText={setDisciplina}></TextInput>
+                <Text style={styles.tituloInput}>Disciplina:</Text>
+                <TextInput style={styles.input} value={disciplina} onChangeText={setDisciplina}></TextInput>
 
-            <Text style={styles.tituloInput}>Período:</Text>
+                <Text style={styles.tituloInput}>Período:</Text>
 
-            <Picker
-                style={styles.select}
-                selectedValue={periodo}
-                onValueChange={(itemValue, itemIndex) => setPeriodo(itemValue)}>
-                    <Picker.Item label="" value=""/>
-                {periodos.map((item) => (
-                    <Picker.Item key={item.id} label={item.periodo} value={item.id} />
-                ))}
-            </Picker>
+                <Picker
+                    style={styles.select}
+                    selectedValue={periodo}
+                    onValueChange={(itemValue, itemIndex) => setPeriodo(itemValue)}>
+                        <Picker.Item label="" value=""/>
+                    {periodos.map((item) => (
+                        <Picker.Item key={item.id} label={item.periodo} value={item.id} />
+                    ))}
+                </Picker>
 
-            <View style={styles.areaImg}>
-                {!image && <MaterialCommunityIcons name={'file-image'} color='#fff' size={60} />}
-                {image && <Image source={{ uri: image }} style={styles.imagemSelecionada} />}
+                <View style={styles.areaImg}>
+                    {!image && <MaterialCommunityIcons name={'file-image'} color='#fff' size={60} />}
+                    {image && <Image source={{ uri: image }} style={styles.imagemSelecionada} />}
+                </View>
+
+                <TouchableOpacity style={styles.btnSelecionarImg} onPress={selecionarImagem}>
+                    <Text style={styles.txtBtn}>Selecionar Imagem</Text>
+                </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.btnSelecionarImg} onPress={selecionarImagem}>
-                <Text style={styles.txtBtn}>Selecionar Imagem</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.btnCadastrar} onPress={validar}><Text style={styles.txtBtn}>Cadastrar</Text></TouchableOpacity>
+            <View style={styles.footer}>
+                <TouchableOpacity style={styles.btnCadastrar} onPress={validar}><Text style={styles.txtBtn}>Cadastrar</Text></TouchableOpacity>
+            </View>
         </View>
     )
 }

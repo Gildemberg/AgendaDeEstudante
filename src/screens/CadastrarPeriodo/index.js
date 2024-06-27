@@ -37,31 +37,51 @@ export default function CadastrarPeriodo({ navigation }) {
             setErro("Preencha todos os campos!");
         } else {
             setErro(null);
-            cadastrarDisciplina();
+            cadastrarPeriodo();
         }
     }
 
-    const cadastrarDisciplina = () => {
-        set(push(ref(db, 'periodos/' + idUser)), {
+    const cadastrarPeriodo = () => {
+
+
+
+        const newRef = push(ref(db, 'periodos/' + idUser));
+        const newId = newRef.key;
+
+        set(newRef, {
             periodo: periodo,
-            etapas: etapas
-        });
-        navigation.navigate('Drawers');
-    }
+        }).then(() => {
+            for(let i=1; i<=etapas; i++){
+                const url = push(ref(db, 'periodos/' + idUser + '/' + newId));
+                set(url, {
+                    etapas: i
+                })
+            }
+    }).catch ((error) => {
+        console.error("Error saving data:", error);
+    });
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.titulo}>CADASTRO DE DISCIPLINA</Text>
 
-            {erro != null && (<Text style={styles.alert}>{erro}</Text>)}
 
-            <Text style={styles.tituloInput}>Período:</Text>
-            <TextInput style={styles.input} placeholder="ex: 1, 2, 3..." value={periodo} onChangeText={setPeriodo}></TextInput>
-            
-            <Text style={styles.tituloInput}>Quantidade de Etapas:</Text>
-            <TextInput style={styles.input} placeholder="ex: 1, 2, 3..." value={etapas} onChangeText={setEtapas}></TextInput>
 
-            <TouchableOpacity style={styles.btnCadastrar} onPress={validar}><Text style={styles.txtBtn}>Cadastrar</Text></TouchableOpacity>
-        </View>
-    )
+
+
+    navigation.navigate('Drawers');
+}
+
+return (
+    <View style={styles.container}>
+        <Text style={styles.titulo}>CADASTRO DE DISCIPLINA</Text>
+
+        {erro != null && (<Text style={styles.alert}>{erro}</Text>)}
+
+        <Text style={styles.tituloInput}>Período:</Text>
+        <TextInput style={styles.input} placeholder="ex: 1, 2, 3..." value={periodo} onChangeText={setPeriodo}></TextInput>
+
+        <Text style={styles.tituloInput}>Quantidade de Etapas:</Text>
+        <TextInput style={styles.input} placeholder="ex: 1, 2, 3..." value={etapas} onChangeText={setEtapas}></TextInput>
+
+        <TouchableOpacity style={styles.btnCadastrar} onPress={validar}><Text style={styles.txtBtn}>Cadastrar</Text></TouchableOpacity>
+    </View>
+)
 }

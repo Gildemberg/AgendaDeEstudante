@@ -5,12 +5,17 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         backgroundColor: "#000",
-        padding: 50
+        padding: 30,
+        justifyContent: 'space-between'
+    },
+    content: {
+        width: '100%',
     },
     titulo: {
         color: '#fff',
-        fontSize: 40,
+        fontSize: 30,
         marginBottom: 40,
+        marginTop: 40,
         textAlign: 'center'
     },
     alert:{
@@ -18,16 +23,16 @@ const styles = StyleSheet.create({
     },
     tituloInput:{
         color: '#fff',
-        fontSize: 40,
+        fontSize: 25,
     },
     input: {
         width: '100%',
-        padding: 20,
+        padding: 15,
         backgroundColor: "#4F4F4F",
         borderRadius: 10,
         marginBottom: 40,
         color: "#fff",
-        fontSize: 30
+        fontSize: 20
     },
     select: {
         backgroundColor: "#4F4F4F",
@@ -47,8 +52,9 @@ const styles = StyleSheet.create({
         alignItems: 'center' 
     },
     imagemSelecionada: {
-        width: 500,
-        height: 200
+        width: "95%",
+        height: 200,
+        borderRadius: 8,
     },
     btnSelecionarImg: {
         width: '100%',
@@ -64,13 +70,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#006400",
         borderRadius: 10,
         alignSelf: 'center',
-        position: 'absolute',
-        bottom: 70,
+        
     },
     txtBtn: {
         color: '#fff',
         textAlign: 'center',
-        fontSize: 30
+        fontSize: 25
+    },
+    footer: {
+        justifyContent: 'flex-end'
     }
 });
 
