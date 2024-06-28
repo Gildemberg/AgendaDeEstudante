@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, Text, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styles from "./style";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import firebase from "../../service/firebaseConfig";
 import { getDatabase, onValue, query, ref, push, set, remove, get } from "firebase/database";
@@ -34,7 +35,6 @@ export default function InfoDisciplina({ navigation, route }) {
             setNomeDisciplina(infor[0] || "");
             setImage(infor[1] || "");
             setMedia(infor[2] || "");
-            console.log(infor[2]);
         });
     }, [route.params])
 
@@ -46,6 +46,18 @@ export default function InfoDisciplina({ navigation, route }) {
             <View style={styles.disciplina}>
                 <Text style={styles.txtDisciplina}>{nomeDisciplina}</Text> 
                 <Text style={styles.txtMedia}>Média Final: {media},0</Text> 
+            </View>
+            
+            <View style={styles.bottomTabs}>
+                <TouchableOpacity style={styles.btnInfo}>
+                    <MaterialCommunityIcons name="inbox-full" color="#fff" size={32} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btnAula} onPress={()=>navigation.navigate('Aulas', { id: idDisciplina, periodo: periodo, etapa: etapa } )}>
+                    <MaterialCommunityIcons name="google-classroom" color="#fff" size={32} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btnAtividade} onPress={()=>navigation.navigate('Atividades', { id: idDisciplina, periodo: periodo, etapa: etapa } )}>
+                    <MaterialCommunityIcons name="format-list-numbered" color="#fff" size={32} />
+                </TouchableOpacity>
             </View>
         </View>
     )

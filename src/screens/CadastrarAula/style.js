@@ -10,17 +10,23 @@ const styles = StyleSheet.create({
     titulo:{
         textAlign: 'center',
         color:"#fff",
-        fontSize: 30
+        fontSize: 30,
+        padding: 30
+    },
+    alert:{
+        color: "red",
+        fontSize:15,
+        textAlign: 'center'
     },
     tituloInput:{
         color:"#fff",
         fontSize: 25
     },
     input: {
-        padding:10,
+        padding:15,
         backgroundColor: "#424242",
         borderRadius:15,
-        marginBottom: 20,
+        marginBottom: 30,
         color: "#fff",
         fontSize: 20
     },

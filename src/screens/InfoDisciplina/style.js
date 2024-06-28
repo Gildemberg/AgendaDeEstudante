@@ -37,6 +37,34 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 20,
         textAlign: 'center'
+    },
+    bottomTabs:{
+        flexDirection: 'row',
+        width:"100%",
+        position: 'absolute',
+        bottom: 0,
+        height: 50
+    },
+    btnInfo: {
+        backgroundColor: "#424242",
+        width: '100%',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    btnAula: {
+        backgroundColor: "#696969",
+        width: '100%',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    btnAtividade: {
+        backgroundColor: "#696969",
+        width: '100%',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 });
 

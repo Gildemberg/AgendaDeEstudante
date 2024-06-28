@@ -86,9 +86,7 @@ export default function CreateUser({navigation}){
 
     return (
         <View style={styles.container}>
-            {erro != null && (
-                <Text style={styles.alert}>{erro}</Text>
-            )}
+            {erro != null && (<Text style={styles.alert}>{erro}</Text>)}
             <View style={styles.areaImg}>
                 <TouchableOpacity style={styles.btnImg} onPress={selecionarImagem}>
                     {!image && <Text style={styles.txtImg}>Selecionar Foto</Text>}

@@ -138,7 +138,7 @@ export default function Disciplinas({ navigation }) {
                 //keyExtractor={(item) => item.id}
 
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.disciplina} onPress={()=>navigation.navigate('Tabs', { screen: 'InfoDisciplina', params: { id: item.id, periodo: filtroPeriodo, etapa: filtroEtapa } })}>
+                    <TouchableOpacity style={styles.disciplina} onPress={()=>navigation.navigate('InfoDisciplina', { id: item.id, periodo: filtroPeriodo, etapa: filtroEtapa } )}>
                         <View style={styles.areaImagem}>
                             {item.image ? <Image source={{ uri: item.image }} style={styles.imagem} /> : null}
                         </View>
