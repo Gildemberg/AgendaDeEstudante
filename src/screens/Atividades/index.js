@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Modal } from "react-native";
 import styles from './style';
 
 import { FlatList } from "react-native-gesture-handler";
@@ -19,6 +19,32 @@ export default function Atividades({ navigation, route }) {
     const [etapa, setEtapa] = useState("");
     const [nomeDisciplina, setNomeDisciplina] = useState("");
     const [atividades, setAtividades] = useState([]);
+
+    const [titulo, setTitulo] = useState("");
+    const [assunto, setAssunto] = useState("");
+    const [desc, setDesc] = useState("");
+    const [valor, setValor] = useState("");
+    const [nota, setNota] = useState("");
+    const [peso, setPeso] = useState("");
+    const [prazo, setPrazo] = useState("");
+
+    const [modalVisivel, setModalVisivel] = useState(false);
+
+    const toggleModal = () => {
+        setModalVisivel(!modalVisivel);
+    }
+
+    const setInfo = (titulo, assunto, desc, valor, nota, peso, prazo) => {
+        setTitulo(titulo);
+        setAssunto(assunto);
+        setDesc(desc);
+        setValor(valor);
+        setNota(nota);
+        setPeso(peso);
+        setPrazo(prazo);
+
+        toggleModal();
+    }
 
     //Recebe: Id Disciplina, Periodo, Etapa
     useEffect(() => {
@@ -80,16 +106,36 @@ export default function Atividades({ navigation, route }) {
     return (
         <View style={styles.container}>
 
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisivel}
+                onRequestClose={() => { toggleModal() }}
+            >
+                <View style={styles.container}>
+                    <Text style={styles.titulo}>{nomeDisciplina}</Text>
+                    <Text style={styles.titulo2}>Atividades</Text>
+                    <View style={styles.cardAbertoAtividade}>
+                        <Text style={styles.tituloAtividade}>{titulo}</Text>
+                        <Text style={styles.assuntoAtividade}>{assunto}</Text>
+                        <Text style={styles.assuntoAtividade}>{desc}</Text>
+                        <View style={styles.colunas}>
+                            <View style={styles.coluna1}>
+                                <Text style={styles.footerCard}>Nota: {nota}   Valor: {valor}</Text>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
 
 
-            
             <Text style={styles.titulo}>{nomeDisciplina}</Text>
             <Text style={styles.titulo2}>Atividades</Text>
             <FlatList
                 showsHorizontalScrollIndicator={false}
                 data={atividades}
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.cardAtividade}>
+                    <TouchableOpacity style={styles.cardAtividade} onPress={() => setInfo(item.titulo, item.assunto, item.observacoes, item.valor, item.nota, item.peso, item.prazo)}>
                         <Text style={styles.tituloAtividade}>{item.titulo}</Text>
                         <Text style={styles.assuntoAtividade}>{item.assunto}</Text>
                         <View style={styles.colunas}>

@@ -6,14 +6,14 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: "#000",
     },
-    titulo:{
+    titulo: {
         fontSize: 15,
         color: "#fff",
         marginBottom: 10,
         marginTop: 60,
         textAlign: 'center'
     },
-    titulo2:{
+    titulo2: {
         fontSize: 35,
         color: "#fff",
         marginBottom: 20,
@@ -59,9 +59,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    bottomTabs:{
+    bottomTabs: {
         flexDirection: 'row',
-        width:"100%",
+        width: "100%",
         position: 'absolute',
         bottom: 0,
         height: 50
@@ -87,6 +87,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    cardAbertoAtividade: {
+        margin: 20,
+        backgroundColor: '#111',
+        borderRadius: 20,
+        padding: 35,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    }
 });
 
 export default styles;
