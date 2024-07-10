@@ -6,14 +6,14 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: "#000",
     },
-    titulo:{
+    titulo: {
         fontSize: 15,
         color: "#fff",
         marginBottom: 10,
         marginTop: 60,
         textAlign: 'center'
     },
-    titulo2:{
+    titulo2: {
         fontSize: 35,
         color: "#fff",
         marginBottom: 20,
@@ -59,9 +59,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    bottomTabs:{
+    bottomTabs: {
         flexDirection: 'row',
-        width:"100%",
+        width: "100%",
         position: 'absolute',
         bottom: 0,
         height: 50
@@ -86,6 +86,58 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    cardAbertoAtividade: {
+        margin: 20,
+        backgroundColor: '#111',
+        borderRadius: 50,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    bodyCard: {
+        padding: 30
+    },
+    descricao: {
+        color: "#fff",
+        marginBottom: 50,
+        marginTop: 30,
+        textAlign: 'justify'
+    },
+    valores: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    footerCardA: {
+        backgroundColor: '#32CD32',
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        padding: 10
+    },
+    prazo: {
+        textAlign: 'center',
+        fontSize: 20,
+        color: '#000',
+        fontWeight: 'bold'
+    },
+    botoes: {
+        flexDirection: 'row',
+        alignSelf: 'flex-end',
+        marginRight: 20
+    },
+    btn: {
+        backgroundColor: "#424242",
+        width: 50,
+        height: 50,
+        borderRadius: 70,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10
     },
 });
 
