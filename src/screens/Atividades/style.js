@@ -90,8 +90,7 @@ const styles = StyleSheet.create({
     cardAbertoAtividade: {
         margin: 20,
         backgroundColor: '#111',
-        borderRadius: 20,
-        padding: 35,
+        borderRadius: 50,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -100,7 +99,46 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-    }
+    },
+    bodyCard: {
+        padding: 30
+    },
+    descricao: {
+        color: "#fff",
+        marginBottom: 50,
+        marginTop: 30,
+        textAlign: 'justify'
+    },
+    valores: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    footerCardA: {
+        backgroundColor: '#32CD32',
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        padding: 10
+    },
+    prazo: {
+        textAlign: 'center',
+        fontSize: 20,
+        color: '#000',
+        fontWeight: 'bold'
+    },
+    botoes: {
+        flexDirection: 'row',
+        alignSelf: 'flex-end',
+        marginRight: 20
+    },
+    btn: {
+        backgroundColor: "#424242",
+        width: 50,
+        height: 50,
+        borderRadius: 70,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10
+    },
 });
 
 export default styles;

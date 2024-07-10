@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Modal } from "react-native";
+import moment from 'moment';
+import 'moment/locale/pt-br';
+moment.locale('pt-br');
 import styles from './style';
 
 import { FlatList } from "react-native-gesture-handler";
@@ -19,14 +22,19 @@ export default function Atividades({ navigation, route }) {
     const [etapa, setEtapa] = useState("");
     const [nomeDisciplina, setNomeDisciplina] = useState("");
     const [atividades, setAtividades] = useState([]);
-
+    
+    const [idAtividade, setIdAtividade] = useState("");
     const [titulo, setTitulo] = useState("");
     const [assunto, setAssunto] = useState("");
     const [desc, setDesc] = useState("");
+    const [status, setStatus] = useState("");
     const [valor, setValor] = useState("");
     const [nota, setNota] = useState("");
     const [peso, setPeso] = useState("");
     const [prazo, setPrazo] = useState("");
+    const [dataF, setDataF] = useState("");
+    const [diaSem, setDiaSem] = useState("");
+
 
     const [modalVisivel, setModalVisivel] = useState(false);
 
@@ -34,7 +42,7 @@ export default function Atividades({ navigation, route }) {
         setModalVisivel(!modalVisivel);
     }
 
-    const setInfo = (titulo, assunto, desc, valor, nota, peso, prazo) => {
+    const setInfo = (titulo, assunto, desc, valor, nota, peso, prazo, status, id) => {
         setTitulo(titulo);
         setAssunto(assunto);
         setDesc(desc);
@@ -42,8 +50,10 @@ export default function Atividades({ navigation, route }) {
         setNota(nota);
         setPeso(peso);
         setPrazo(prazo);
+        setStatus(status);
+        setIdAtividade(id);
 
-        toggleModal();
+        converter(prazo);
     }
 
     //Recebe: Id Disciplina, Periodo, Etapa
@@ -103,6 +113,17 @@ export default function Atividades({ navigation, route }) {
 
     }
 
+    const converter = (dataMili) => {
+        const data = moment(dataMili);
+
+        const dataFormatada = data.format('DD/MM');
+        const diaFormatado = data.format('ddd').replace(/^\w/, (c) => c.toUpperCase());;
+        setDataF(dataFormatada);
+        setDiaSem(diaFormatado);
+
+        toggleModal();
+    }
+
     return (
         <View style={styles.container}>
 
@@ -115,15 +136,45 @@ export default function Atividades({ navigation, route }) {
                 <View style={styles.container}>
                     <Text style={styles.titulo}>{nomeDisciplina}</Text>
                     <Text style={styles.titulo2}>Atividades</Text>
+
                     <View style={styles.cardAbertoAtividade}>
-                        <Text style={styles.tituloAtividade}>{titulo}</Text>
-                        <Text style={styles.assuntoAtividade}>{assunto}</Text>
-                        <Text style={styles.assuntoAtividade}>{desc}</Text>
-                        <View style={styles.colunas}>
-                            <View style={styles.coluna1}>
-                                <Text style={styles.footerCard}>Nota: {nota}   Valor: {valor}</Text>
+                        <View style={styles.bodyCard}>
+                            <Text style={styles.tituloAtividade}>{titulo}</Text>
+                            <Text style={styles.assuntoAtividade}>{assunto}</Text>
+                            <Text style={styles.descricao}>{desc}</Text>
+
+                            <View style={styles.valores}>
+                                <Text style={styles.footerCard}>Nota: {nota}</Text>
+                                <Text style={styles.footerCard}>Valor: {valor}</Text>
+                                <Text style={styles.footerCard}>Peso: {peso}</Text>
                             </View>
                         </View>
+
+                        {!status && <View style={[styles.footerCardA, { backgroundColor: getColor(prazo) }]}>
+                            <Text style={styles.prazo}>
+                                Prazo: {dataF} - {diaSem}
+                            </Text>
+                        </View>}
+
+                        {status && <View style={styles.footerCardA}>
+                            <Text style={styles.prazo}>
+                                Prazo: {dataF} - {diaSem}
+                            </Text>
+                        </View>}
+                    </View>
+
+                    <View style={styles.botoes}>
+                        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('CadastrarAula', { id: idDisciplina, periodo: periodo, etapa: etapa })}>
+                            <MaterialCommunityIcons name={'check'} color="#fff" size={32} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('EditarAtividade', { id: idDisciplina, periodo: periodo, etapa: etapa, idAtividade: idAtividade })}>
+                            <MaterialCommunityIcons name={'pencil-outline'} color="#fff" size={32} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('CadastrarAula', { id: idDisciplina, periodo: periodo, etapa: etapa })}>
+                            <MaterialCommunityIcons name={'delete-outline'} color="#fff" size={32} />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -135,7 +186,7 @@ export default function Atividades({ navigation, route }) {
                 showsHorizontalScrollIndicator={false}
                 data={atividades}
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.cardAtividade} onPress={() => setInfo(item.titulo, item.assunto, item.observacoes, item.valor, item.nota, item.peso, item.prazo)}>
+                    <TouchableOpacity style={styles.cardAtividade} onPress={() => setInfo(item.titulo, item.assunto, item.observacoes, item.valor, item.nota, item.peso, item.prazo, item.status, item.id)}>
                         <Text style={styles.tituloAtividade}>{item.titulo}</Text>
                         <Text style={styles.assuntoAtividade}>{item.assunto}</Text>
                         <View style={styles.colunas}>

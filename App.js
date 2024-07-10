@@ -14,6 +14,8 @@ import CadastrarPeriodo from './src/screens/CadastrarPeriodo';
 import CadastrarAula from './src/screens/CadastrarAula';
 import CadastrarAtividade from './src/screens/CadastrarAtividade';
 
+import EditarAtividade from './src/screens/EditarAtividade';
+
 //DRAWERS
 import Disciplinas from './src/screens/Disciplinas';
 import Periodos from './src/screens/Periodos';
@@ -55,6 +57,8 @@ export default function App() {
         <Stack.Screen name='Atividades' component={Atividades} options={{ headerShown: false, animationEnabled: false }} />
 
         <Stack.Screen name='CadastrarAtividade' component={CadastrarAtividade} options={{ headerShown: false }} />
+
+        <Stack.Screen name='EditarAtividade' component={EditarAtividade} options={{ headerShown: false }} />
 
         <Stack.Screen name="Drawers" component={Drawers} options={{ headerShown: false }} />
       </Stack.Navigator>
