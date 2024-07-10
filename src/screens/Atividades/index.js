@@ -9,7 +9,7 @@ import { FlatList } from "react-native-gesture-handler";
 
 import { firebase } from '../../service/firebaseConfig';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getDatabase, onValue, query, ref, set } from "firebase/database";
+import { getDatabase, onValue, query, ref, set, remove } from "firebase/database";
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -124,6 +124,12 @@ export default function Atividades({ navigation, route }) {
         toggleModal();
     }
 
+    const removerAtividade = (id) => {
+        setModalVisivel(false);
+        const url = ref(db, `atividades/${auth.currentUser.uid}/${idDisciplina}/${idAtividade}`);
+        remove(url);
+    }
+
     return (
         <View style={styles.container}>
 
@@ -172,7 +178,7 @@ export default function Atividades({ navigation, route }) {
                             <MaterialCommunityIcons name={'pencil-outline'} color="#fff" size={32} />
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('CadastrarAula', { id: idDisciplina, periodo: periodo, etapa: etapa })}>
+                        <TouchableOpacity style={styles.btn} onPress={() => removerAtividade()}>
                             <MaterialCommunityIcons name={'delete-outline'} color="#fff" size={32} />
                         </TouchableOpacity>
                     </View>

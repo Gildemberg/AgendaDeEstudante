@@ -19,6 +19,7 @@ export default function EditarAtividade({ navigation, route }) {
     const [idAtividade, setIdAtividade] = useState("");
     const [titulo, setTitulo] = useState("");
     const [assunto, setAssunto] = useState("");
+    const [status, setStatus] = useState("");
     const [nota, setNota] = useState("");
     const [valor, setValor] = useState("");
     const [peso, setPeso] = useState("");
@@ -34,22 +35,22 @@ export default function EditarAtividade({ navigation, route }) {
             setPeriodo(route.params.periodo);
             setEtapa(route.params.etapa);
 
-            onValue(ref(db, `atividades/${auth.currentUser.uid}/${route.params.id}/${route.params.idAtividade}`), (snapshot) => {
-                let infor = [];
-                snapshot.forEach((data) => {
-                    infor.push(data.val());
-                })
-                const data = moment(infor[4] || "");
-                const dataFormatada = data.format('DD/MM/YYYY');
+            const url = ref(db, `atividades/${auth.currentUser.uid}/${route.params.id}/${route.params.idAtividade}`);
 
-                setAssunto(infor[0] || "");
-                setNota(infor[1] || "");
-                setObservacoes(infor[2] || "");
-                setPeso(infor[3] || "");
-                setPrazo(dataFormatada);
-                setStatus(infor[5] || "");
-                setTitulo(infor[6] || "");
-                setValor(infor[7] || "");
+            onValue(url, (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    const dataFormatada = moment(data.prazo).format('DD/MM/YYYY');
+
+                    setTitulo(data.titulo || "");
+                    setAssunto(data.assunto || "");
+                    setNota(data.nota || "");
+                    setValor(data.valor || "");
+                    setPeso(data.peso || "");
+                    setPrazo(dataFormatada || "");
+                    setObservacoes(data.observacoes || "");
+                    setStatus(data.status || "");
+                }
             });
         }
     }, [route.params])
@@ -68,7 +69,9 @@ export default function EditarAtividade({ navigation, route }) {
         const data = new Date(year, month - 1, day);
         const milisegundos = data.getTime();
 
-        set(ref(db, `atividades/${auth.currentUser.uid}/${idDisciplina}`), {
+        const url = ref(db, `atividades/${auth.currentUser.uid}/${idDisciplina}/${route.params.idAtividade}`)
+
+        set(url , {
             titulo: titulo,
             assunto: assunto,
             nota: nota,

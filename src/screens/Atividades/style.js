@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     },
     cardAbertoAtividade: {
         margin: 20,
-        backgroundColor: '#111',
+        backgroundColor: '#424242',
         borderRadius: 50,
         shadowColor: '#000',
         shadowOffset: {
