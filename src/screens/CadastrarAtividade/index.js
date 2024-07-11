@@ -49,7 +49,7 @@ export default function CadastrarAtividade({ navigation, route }) {
         set(push(ref(db, `atividades/${auth.currentUser.uid}/${idDisciplina}`)), {
             titulo: titulo,
             assunto: assunto,
-            nota: "-",
+            nota: "",
             valor: valor,
             peso: peso,
             prazo: milisegundos,

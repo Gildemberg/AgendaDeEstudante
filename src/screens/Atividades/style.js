@@ -139,6 +139,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 10
     },
+    btnInserir: {
+        backgroundColor: "#32CD32",
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10,
+        padding: 10
+    },
+    txt: {
+        color: "#fff"
+    }
 });
 
 export default styles;

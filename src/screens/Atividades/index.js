@@ -130,6 +130,18 @@ export default function Atividades({ navigation, route }) {
         remove(url);
     }
 
+    const btnInserirNota=()=>{
+        if(nota=="" && status==""){
+            if(comparar(prazo)==='Não entregue'){
+                return <Text></Text>
+            }else{
+                return <TouchableOpacity style={styles.btnInserir} onPress={() => navigation.navigate('CadastrarAula', { id: idDisciplina, periodo: periodo, etapa: etapa })}>
+                        <Text style={styles.txt}>Inserir Nota</Text>
+                    </TouchableOpacity>
+            }
+        }
+    }
+
     return (
         <View style={styles.container}>
 
@@ -150,7 +162,8 @@ export default function Atividades({ navigation, route }) {
                             <Text style={styles.descricao}>{desc}</Text>
 
                             <View style={styles.valores}>
-                                <Text style={styles.footerCard}>Nota: {nota}</Text>
+                                {!nota && <Text style={styles.footerCard}>Nota: 0</Text>}
+                                {nota && <Text style={styles.footerCard}>Nota: {nota}</Text>}
                                 <Text style={styles.footerCard}>Valor: {valor}</Text>
                                 <Text style={styles.footerCard}>Peso: {peso}</Text>
                             </View>
@@ -170,9 +183,7 @@ export default function Atividades({ navigation, route }) {
                     </View>
 
                     <View style={styles.botoes}>
-                        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('CadastrarAula', { id: idDisciplina, periodo: periodo, etapa: etapa })}>
-                            <MaterialCommunityIcons name={'check'} color="#fff" size={32} />
-                        </TouchableOpacity>
+                        {btnInserirNota()}
 
                         <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('EditarAtividade', { id: idDisciplina, periodo: periodo, etapa: etapa, idAtividade: idAtividade })}>
                             <MaterialCommunityIcons name={'pencil-outline'} color="#fff" size={32} />
@@ -197,7 +208,8 @@ export default function Atividades({ navigation, route }) {
                         <Text style={styles.assuntoAtividade}>{item.assunto}</Text>
                         <View style={styles.colunas}>
                             <View style={styles.coluna1}>
-                                <Text style={styles.footerCard}>Nota: {item.nota}   Valor: {item.valor}</Text>
+                                {item.nota && <Text style={styles.footerCard}>Nota: {item.nota}   Valor: {item.valor}</Text>}
+                                {!item.nota && <Text style={styles.footerCard}>Nota: 0   Valor: {item.valor}</Text>}
                             </View>
                             <View style={styles.coluna2}>
                                 {!item.status && <Text style={[styles.statusContagem, { color: getColor(item.prazo) }]}>{comparar(item.prazo)}</Text>}
