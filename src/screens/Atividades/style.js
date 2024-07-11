@@ -37,17 +37,144 @@ const styles = StyleSheet.create({
         color: "#fff",
         textAlign: 'center'
     },
-    footerCard: {
-        fontSize: 15,
-        color: "#fff",
-    },
     colunas: {
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
+    txtFooter: {
+        fontSize: 15,
+        color: "#fff",
+    },
     status: {
         color: '#32CD32'
     },
+
+
+
+    cardAbertoAtividade: {
+        backgroundColor: "#424242",
+        width: '80%',
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        margin: 10,
+        marginBottom: -10,
+        padding: 15,
+        paddingBottom: 0,
+        alignSelf: 'center',
+        borderWidth: 2,
+        borderColor: "#32CD32"
+    },
+    bodyCard: {
+        padding: 30
+    },
+    descricao: {
+        color: "#fff",
+        marginBottom: 50,
+        marginTop: 30,
+        textAlign: 'justify'
+    },
+    valores: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    footer: {
+        backgroundColor: '#32CD32',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        padding: 10,
+    },
+    footerCardA: {
+        width: '80%',
+        alignSelf: 'center',
+    },
+    prazo: {
+        textAlign: 'center',
+        fontSize: 20,
+        color: '#000',
+        fontWeight: 'bold'
+    },
+    botoes: {
+        flexDirection: 'row',
+        alignSelf: 'center',
+        backgroundColor: "#fff",
+        width: "80%"
+    },
+    btn: {
+        backgroundColor: "#424242",
+        width: "30%",
+        height: 50,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10
+    },
+    btnInserir: {
+        backgroundColor: "#32CD32",
+        width: "30%",
+        height: 50,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        margin: 10,
+        marginLeft: 5
+    },
+    txt: {
+        color: "#fff"
+    },
+
+
+    modal: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    cardInserirNota: {
+        backgroundColor: "#d3d3d3",
+        borderRadius: 20,
+        width: 500,
+        alignItems: 'center',
+        padding: 10
+    },
+    btnClose:{
+        position: 'absolute',
+        right: 10,
+        top: 10,
+    },
+    tituloIncluirNota:{
+        fontSize: 20,
+        marginBottom: 5
+    },
+    input: {
+        width: '30%',
+        padding: 15,
+        backgroundColor: "#4F4F4F",
+        borderRadius: 10,
+        marginBottom: 10,
+        color: "#fff",
+        fontSize: 20
+    },
+    incluirNota: {
+        backgroundColor: "#32CD32",
+        padding: 10,
+        borderRadius:10
+    },
+    txtIncluirNota: {
+        color: "#fff",
+        fontSize: 18,
+    },
+
+
     btnAdd: {
         backgroundColor: "#424242",
         width: 50,
@@ -87,69 +214,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    cardAbertoAtividade: {
-        margin: 20,
-        backgroundColor: '#424242',
-        borderRadius: 50,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    bodyCard: {
-        padding: 30
-    },
-    descricao: {
-        color: "#fff",
-        marginBottom: 50,
-        marginTop: 30,
-        textAlign: 'justify'
-    },
-    valores: {
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-    },
-    footerCardA: {
-        backgroundColor: '#32CD32',
-        borderBottomLeftRadius: 50,
-        borderBottomRightRadius: 50,
-        padding: 10
-    },
-    prazo: {
-        textAlign: 'center',
-        fontSize: 20,
-        color: '#000',
-        fontWeight: 'bold'
-    },
-    botoes: {
-        flexDirection: 'row',
-        alignSelf: 'flex-end',
-        marginRight: 20
-    },
-    btn: {
-        backgroundColor: "#424242",
-        width: 50,
-        height: 50,
-        borderRadius: 70,
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: 10
-    },
-    btnInserir: {
-        backgroundColor: "#32CD32",
-        borderRadius: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: 10,
-        padding: 10
-    },
-    txt: {
-        color: "#fff"
-    }
 });
 
 export default styles;

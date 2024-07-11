@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Modal } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Modal } from "react-native";
 import moment from 'moment';
 import 'moment/locale/pt-br';
 moment.locale('pt-br');
@@ -22,7 +22,7 @@ export default function Atividades({ navigation, route }) {
     const [etapa, setEtapa] = useState("");
     const [nomeDisciplina, setNomeDisciplina] = useState("");
     const [atividades, setAtividades] = useState([]);
-    
+
     const [idAtividade, setIdAtividade] = useState("");
     const [titulo, setTitulo] = useState("");
     const [assunto, setAssunto] = useState("");
@@ -35,26 +35,7 @@ export default function Atividades({ navigation, route }) {
     const [dataF, setDataF] = useState("");
     const [diaSem, setDiaSem] = useState("");
 
-
     const [modalVisivel, setModalVisivel] = useState(false);
-
-    const toggleModal = () => {
-        setModalVisivel(!modalVisivel);
-    }
-
-    const setInfo = (titulo, assunto, desc, valor, nota, peso, prazo, status, id) => {
-        setTitulo(titulo);
-        setAssunto(assunto);
-        setDesc(desc);
-        setValor(valor);
-        setNota(nota);
-        setPeso(peso);
-        setPrazo(prazo);
-        setStatus(status);
-        setIdAtividade(id);
-
-        converter(prazo);
-    }
 
     //Recebe: Id Disciplina, Periodo, Etapa
     useEffect(() => {
@@ -100,6 +81,7 @@ export default function Atividades({ navigation, route }) {
         }
 
     }
+
     const getColor = (prazo) => {
         const hoje = new Date().getTime();
 
@@ -113,6 +95,21 @@ export default function Atividades({ navigation, route }) {
 
     }
 
+
+    const setInfo = (titulo, assunto, desc, valor, nota, peso, prazo, status, id) => {
+        setTitulo(titulo);
+        setAssunto(assunto);
+        setDesc(desc);
+        setValor(valor);
+        setNota(nota);
+        setPeso(peso);
+        setPrazo(prazo);
+        setStatus(status);
+        setIdAtividade(id);
+
+        converter(prazo);
+    }
+
     const converter = (dataMili) => {
         const data = moment(dataMili);
 
@@ -120,9 +117,13 @@ export default function Atividades({ navigation, route }) {
         const diaFormatado = data.format('ddd').replace(/^\w/, (c) => c.toUpperCase());;
         setDataF(dataFormatada);
         setDiaSem(diaFormatado);
-
-        toggleModal();
     }
+
+    const toggleModal = () => {
+        setModalVisivel(!modalVisivel);
+    }
+
+
 
     const removerAtividade = (id) => {
         setModalVisivel(false);
@@ -130,93 +131,133 @@ export default function Atividades({ navigation, route }) {
         remove(url);
     }
 
-    const btnInserirNota=()=>{
-        if(nota=="" && status==""){
-            if(comparar(prazo)==='Não entregue'){
-                return <Text></Text>
-            }else{
-                return <TouchableOpacity style={styles.btnInserir} onPress={() => navigation.navigate('CadastrarAula', { id: idDisciplina, periodo: periodo, etapa: etapa })}>
-                        <Text style={styles.txt}>Inserir Nota</Text>
+
+
+    const btnInserirNota = () => {
+        if (nota == "" && status == "") {
+            return <TouchableOpacity style={styles.btnInserir} onPress={() => toggleModal()}>
+                <Text style={styles.txt}>Inserir Nota</Text>
+            </TouchableOpacity>
+        }
+    }
+
+    const incluirNota = () => {
+        const url = ref(db, `atividades/${auth.currentUser.uid}/${idDisciplina}/${idAtividade}`)
+
+        if(comparar(prazo)=="Não entregue" || comparar(prazo)=="Prazo é Hoje"){
+            set(url , {
+                titulo: titulo,
+                assunto: assunto,
+                nota: nota,
+                valor: valor,
+                peso: peso,
+                prazo: prazo,
+                observacoes: desc,
+                status: status
+            });
+        }else{
+            set(url , {
+                titulo: titulo,
+                assunto: assunto,
+                nota: nota,
+                valor: valor,
+                peso: peso,
+                prazo: prazo,
+                observacoes: desc,
+                status: "Entregue"
+            });
+        }
+        toggleModal();
+    }
+
+
+    const cardAtividade = (id, titulo, assunto, desc, valor, nota, peso, prazo, status) => {
+        if (id === idAtividade) {
+            return <View style={styles.container}>
+                {!status && <View style={[styles.cardAbertoAtividade, { borderColor: getColor(prazo) }]}>
+                    <View style={styles.bodyCard}>
+                        <Text style={styles.tituloAtividade}>{titulo}</Text>
+                        <Text style={styles.assuntoAtividade}>{assunto}</Text>
+                        <Text style={styles.descricao}>{desc}</Text>
+
+                        <View style={styles.valores}>
+                            {!nota && <Text style={styles.txtFooter}>Nota: 0</Text>}
+                            {nota && <Text style={styles.txtFooter}>Nota: {nota}</Text>}
+                            <Text style={styles.txtFooter}>Valor: {valor}</Text>
+                            <Text style={styles.txtFooter}>Peso: {peso}</Text>
+                        </View>
+                    </View>
+                </View>}
+
+                {status && <View style={styles.cardAbertoAtividade}>
+                    <View style={styles.bodyCard}>
+                        <Text style={styles.tituloAtividade}>{titulo}</Text>
+                        <Text style={styles.assuntoAtividade}>{assunto}</Text>
+                        <Text style={styles.descricao}>{desc}</Text>
+
+                        <View style={styles.valores}>
+                            {!nota && <Text style={styles.txtFooter}>Nota: 0</Text>}
+                            {nota && <Text style={styles.txtFooter}>Nota: {nota}</Text>}
+                            <Text style={styles.txtFooter}>Valor: {valor}</Text>
+                            <Text style={styles.txtFooter}>Peso: {peso}</Text>
+                        </View>
+                    </View>
+                </View>}
+
+                <View style={styles.footerCardA}>
+                    {!status && <View style={[styles.footer, { backgroundColor: getColor(prazo) }]}>
+                        <Text style={styles.prazo}>
+                            Prazo: {dataF} - {diaSem}
+                        </Text>
+                    </View>}
+
+                    {status && <View style={styles.footer}>
+                        <Text style={styles.prazo}>
+                            Prazo: {dataF} - {diaSem}
+                        </Text>
+                    </View>}
+                </View>
+
+                <View style={styles.botoes}>
+                    {btnInserirNota()}
+
+                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('EditarAtividade', { id: idDisciplina, periodo: periodo, etapa: etapa, idAtividade: idAtividade })}>
+                        <MaterialCommunityIcons name={'pencil-outline'} color="#fff" size={32} />
                     </TouchableOpacity>
-            }
+
+                    <TouchableOpacity style={styles.btn} onPress={() => removerAtividade()}>
+                        <MaterialCommunityIcons name={'delete-outline'} color="#fff" size={32} />
+                    </TouchableOpacity>
+                </View>
+            </View>
+
+        } else {
+            return <TouchableOpacity style={styles.cardAtividade} onPress={() => setInfo(titulo, assunto, desc, valor, nota, peso, prazo, status, id)}>
+                <Text style={styles.tituloAtividade}>{titulo}</Text>
+                <Text style={styles.assuntoAtividade}>{assunto}</Text>
+                <View style={styles.colunas}>
+                    <View>
+                        {nota && <Text style={styles.txtFooter}>Nota: {nota}   Valor: {valor}</Text>}
+                        {!nota && <Text style={styles.txtFooter}>Nota: -   Valor: {valor}</Text>}
+                    </View>
+                    <View>
+                        {!status && <Text style={[styles.statusContagem, { color: getColor(prazo) }]}>{comparar(prazo)}</Text>}
+                        {status && <Text style={styles.status}>{status}</Text>}
+                    </View>
+                </View>
+            </TouchableOpacity>
         }
     }
 
     return (
         <View style={styles.container}>
-
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisivel}
-                onRequestClose={() => { toggleModal() }}
-            >
-                <View style={styles.container}>
-                    <Text style={styles.titulo}>{nomeDisciplina}</Text>
-                    <Text style={styles.titulo2}>Atividades</Text>
-
-                    <View style={styles.cardAbertoAtividade}>
-                        <View style={styles.bodyCard}>
-                            <Text style={styles.tituloAtividade}>{titulo}</Text>
-                            <Text style={styles.assuntoAtividade}>{assunto}</Text>
-                            <Text style={styles.descricao}>{desc}</Text>
-
-                            <View style={styles.valores}>
-                                {!nota && <Text style={styles.footerCard}>Nota: 0</Text>}
-                                {nota && <Text style={styles.footerCard}>Nota: {nota}</Text>}
-                                <Text style={styles.footerCard}>Valor: {valor}</Text>
-                                <Text style={styles.footerCard}>Peso: {peso}</Text>
-                            </View>
-                        </View>
-
-                        {!status && <View style={[styles.footerCardA, { backgroundColor: getColor(prazo) }]}>
-                            <Text style={styles.prazo}>
-                                Prazo: {dataF} - {diaSem}
-                            </Text>
-                        </View>}
-
-                        {status && <View style={styles.footerCardA}>
-                            <Text style={styles.prazo}>
-                                Prazo: {dataF} - {diaSem}
-                            </Text>
-                        </View>}
-                    </View>
-
-                    <View style={styles.botoes}>
-                        {btnInserirNota()}
-
-                        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('EditarAtividade', { id: idDisciplina, periodo: periodo, etapa: etapa, idAtividade: idAtividade })}>
-                            <MaterialCommunityIcons name={'pencil-outline'} color="#fff" size={32} />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={styles.btn} onPress={() => removerAtividade()}>
-                            <MaterialCommunityIcons name={'delete-outline'} color="#fff" size={32} />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
-
-
             <Text style={styles.titulo}>{nomeDisciplina}</Text>
             <Text style={styles.titulo2}>Atividades</Text>
             <FlatList
                 showsHorizontalScrollIndicator={false}
                 data={atividades}
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.cardAtividade} onPress={() => setInfo(item.titulo, item.assunto, item.observacoes, item.valor, item.nota, item.peso, item.prazo, item.status, item.id)}>
-                        <Text style={styles.tituloAtividade}>{item.titulo}</Text>
-                        <Text style={styles.assuntoAtividade}>{item.assunto}</Text>
-                        <View style={styles.colunas}>
-                            <View style={styles.coluna1}>
-                                {item.nota && <Text style={styles.footerCard}>Nota: {item.nota}   Valor: {item.valor}</Text>}
-                                {!item.nota && <Text style={styles.footerCard}>Nota: 0   Valor: {item.valor}</Text>}
-                            </View>
-                            <View style={styles.coluna2}>
-                                {!item.status && <Text style={[styles.statusContagem, { color: getColor(item.prazo) }]}>{comparar(item.prazo)}</Text>}
-                                {item.status && <Text style={styles.status}>{item.status}</Text>}
-                            </View>
-                        </View>
-                    </TouchableOpacity>
+                    cardAtividade(item.id, item.titulo, item.assunto, item.observacoes, item.valor, item.nota, item.peso, item.prazo, item.status)
                 )}
             />
 
@@ -236,6 +277,27 @@ export default function Atividades({ navigation, route }) {
                     <MaterialCommunityIcons name="format-list-numbered" color="#fff" size={32} />
                 </TouchableOpacity>
             </View>
+
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisivel}
+                onRequestClose={toggleModal}
+            >
+                <View style={styles.modal}>
+                    <View style={styles.cardInserirNota}>
+                        <Text style={styles.tituloIncluirNota}>INFORME SUA NOTA:</Text>
+                        <TextInput style={styles.input} value={nota} onChangeText={setNota} placeholder="Ex.: 1 ou 1.5"></TextInput>
+                        <TouchableOpacity style={styles.incluirNota} onPress={()=>incluirNota()}>
+                            <Text style={styles.txtIncluirNota}>Confirmar</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.btnClose} onPress={() => toggleModal()}>
+                            <MaterialCommunityIcons name="close-circle-outline" color="#4F4F4F" size={35} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </View>
     )
 }
