@@ -76,6 +76,25 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+
+
+    
+    containerAviso:{
+        flex: 1,
+        justifyContent: 'center'
+    },
+    aviso:{
+        backgroundColor: 'yellow',
+        padding: 10,
+        margin: 10,
+        marginTop: -100,
+        borderRadius: 10,
+    },
+    txtAviso:{
+        color: '#000',
+        fontSize: 20,
+        textAlign: 'center'
+    }
 });
 
 export default styles;

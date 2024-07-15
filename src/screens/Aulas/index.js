@@ -20,6 +20,12 @@ export default function Aulas({ navigation, route }) {
     const [nomeDisciplina, setNomeDisciplina] = useState("");
     const [aulas, setAulas] = useState([]);
 
+    const [idAula, setIdAula] = useState("");
+    const [titulo, setTitulo] = useState("");
+    const [assunto, setAssunto] = useState("");
+    const [data, setData] = useState("");
+    const [observacoes, setObservacoes] = useState("");
+
     //Recebe: Id Disciplina, Periodo, Etapa
     useEffect(() => {
         if (route.params && route.params.id) {
@@ -27,7 +33,7 @@ export default function Aulas({ navigation, route }) {
             setPeriodo(route.params.periodo);
             setEtapa(route.params.etapa);
         }
-        
+
         //Recupera nome da disciplina
         const url = query(ref(db, `disciplinas/${auth.currentUser.uid}/${route.params.periodo}/${route.params.etapa}/${route.params.id}`));
         onValue(url, (snapshot) => {
@@ -49,27 +55,60 @@ export default function Aulas({ navigation, route }) {
         });
     }, [])
 
+    const setInfor = (id, titulo, assunto, data, observacoes) => {
+        setIdAula(id);
+        setTitulo(titulo);
+        setAssunto(assunto);
+        setData(data);
+        setObservacoes(observacoes);
+    }
+
+    const cardAula = (id, titulo, assunto, data, observacoes) => {
+        if (id === idAula) { //Card Aberto
+            return <TouchableOpacity style={styles.cardAula} onPress={() => setIdAula("")}>
+                <Text style={styles.tituloAula}>{titulo}</Text>
+                <Text style={styles.tituloAula}>{assunto}</Text>
+                <Text style={styles.observacoes}>{observacoes}</Text>
+                <Text style={styles.dataAula}>{data}</Text>
+            </TouchableOpacity>
+        } else { // Card Fechado
+            return <TouchableOpacity style={styles.cardAula} onPress={() => setInfor(id, titulo, assunto, data, observacoes)}>
+                <Text style={styles.tituloAula}>{titulo} - {assunto}</Text>
+                <Text style={styles.dataAula}>{data}</Text>
+            </TouchableOpacity>
+        }
+    }
+
+    const verificarExistenciaAula = () => {
+        if (aulas.length !== 0) {
+            return <FlatList
+                showsHorizontalScrollIndicator={false}
+                data={aulas}
+                renderItem={({ item }) => (
+                    cardAula(item.id, item.titulo, item.assunto, item.data, item.observacoes)
+                )}
+            />
+        } else {
+            return <View style={styles.containerAviso}>
+                <View style={styles.aviso}>
+                    <Text style={styles.txtAviso}>NENHUMA AULA CADASTRADA!</Text>
+                </View>
+            </View>
+        }
+    }
 
     return (
         <View style={styles.container}>
             <Text style={styles.titulo}>{nomeDisciplina}</Text>
             <Text style={styles.titulo2}>Aulas</Text>
-            <FlatList
-                showsHorizontalScrollIndicator={false}
-                data={aulas}
-                renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.cardAula}>
-                        <Text style={styles.tituloAula}>{item.titulo} - {item.assunto}</Text>
-                        <Text style={styles.dataAula}>{item.data}</Text>
-                    </TouchableOpacity>
-                )}
-            />
+
+            {verificarExistenciaAula()}
 
             <TouchableOpacity style={styles.btnAdd} onPress={() => navigation.navigate('CadastrarAula', { id: idDisciplina, periodo: periodo, etapa: etapa })}>
                 <MaterialCommunityIcons name={'plus'} color="#fff" size={32} />
             </TouchableOpacity>
 
-            
+
             <View style={styles.bottomTabs}>
                 <TouchableOpacity style={styles.btnInfo} onPress={() => navigation.navigate('InfoDisciplina', { id: idDisciplina, periodo: periodo, etapa: etapa })}>
                     <MaterialCommunityIcons name="inbox-full" color="#fff" size={32} />
@@ -77,7 +116,7 @@ export default function Aulas({ navigation, route }) {
                 <TouchableOpacity style={styles.btnAula} >
                     <MaterialCommunityIcons name="google-classroom" color="#fff" size={32} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btnAtividade} onPress={()=>navigation.navigate('Atividades', { id: idDisciplina, periodo: periodo, etapa: etapa } )}>
+                <TouchableOpacity style={styles.btnAtividade} onPress={() => navigation.navigate('Atividades', { id: idDisciplina, periodo: periodo, etapa: etapa })}>
                     <MaterialCommunityIcons name="format-list-numbered" color="#fff" size={32} />
                 </TouchableOpacity>
             </View>
