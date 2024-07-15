@@ -68,19 +68,43 @@ export default function EditarAtividade({ navigation, route }) {
         const [day, month, year] = prazo.split('/').map(Number);
         const data = new Date(year, month - 1, day);
         const milisegundos = data.getTime();
+        const hoje = new Date().getTime();
 
         const url = ref(db, `atividades/${auth.currentUser.uid}/${idDisciplina}/${route.params.idAtividade}`)
-
-        set(url , {
-            titulo: titulo,
-            assunto: assunto,
-            nota: nota,
-            valor: valor,
-            peso: peso,
-            prazo: milisegundos,
-            observacoes: observacoes,
-            status: status
-        });
+        if(nota===''){
+            set(url , {
+                titulo: titulo,
+                assunto: assunto,
+                nota: nota,
+                valor: valor,
+                peso: peso,
+                prazo: milisegundos,
+                observacoes: observacoes,
+                status: ""
+            });
+        }else if(nota!=="" && milisegundos>hoje){
+            set(url , {
+                titulo: titulo,
+                assunto: assunto,
+                nota: nota,
+                valor: valor,
+                peso: peso,
+                prazo: milisegundos,
+                observacoes: observacoes,
+                status: "Entregue"
+            });
+        }else{
+            set(url , {
+                titulo: titulo,
+                assunto: assunto,
+                nota: nota,
+                valor: valor,
+                peso: peso,
+                prazo: milisegundos,
+                observacoes: observacoes,
+                status: ""
+            });
+        }
         navigation.navigate('Atividades', { id: idDisciplina, periodo: periodo, etapa: etapa });
     }
 

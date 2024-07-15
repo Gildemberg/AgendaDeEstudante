@@ -136,16 +136,16 @@ export default function Atividades({ navigation, route }) {
     const btnInserirNota = () => {
         if (nota == "" && status == "") {
             return <TouchableOpacity style={styles.btnInserir} onPress={() => toggleModal()}>
-                <Text style={styles.txt}>Inserir Nota</Text>
-            </TouchableOpacity>
+                        <MaterialCommunityIcons name="plus-circle" color="#32CD32" size={25} />
+                    </TouchableOpacity>
         }
     }
 
     const incluirNota = () => {
         const url = ref(db, `atividades/${auth.currentUser.uid}/${idDisciplina}/${idAtividade}`)
 
-        if(comparar(prazo)=="Não entregue" || comparar(prazo)=="Prazo é Hoje"){
-            set(url , {
+        if (comparar(prazo) == "Não entregue" || comparar(prazo) == "Prazo é Hoje") {
+            set(url, {
                 titulo: titulo,
                 assunto: assunto,
                 nota: nota,
@@ -155,8 +155,8 @@ export default function Atividades({ navigation, route }) {
                 observacoes: desc,
                 status: status
             });
-        }else{
-            set(url , {
+        } else {
+            set(url, {
                 titulo: titulo,
                 assunto: assunto,
                 nota: nota,
@@ -172,62 +172,46 @@ export default function Atividades({ navigation, route }) {
 
 
     const cardAtividade = (id, titulo, assunto, desc, valor, nota, peso, prazo, status) => {
-        if (id === idAtividade) {
+        if (id === idAtividade) { //CARD ABERTO
             return <View style={styles.container}>
-                {!status && <View style={[styles.cardAbertoAtividade, { borderColor: getColor(prazo) }]}>
-                    <View style={styles.bodyCard}>
+                <TouchableOpacity onPress={() => setIdAtividade('')}>
+
+                    <View style={styles.cardAbertoAtividade}>
                         <Text style={styles.tituloAtividade}>{titulo}</Text>
                         <Text style={styles.assuntoAtividade}>{assunto}</Text>
                         <Text style={styles.descricao}>{desc}</Text>
 
                         <View style={styles.valores}>
-                            {!nota && <Text style={styles.txtFooter}>Nota: 0</Text>}
-                            {nota && <Text style={styles.txtFooter}>Nota: {nota}</Text>}
+                            <Text style={styles.txtFooter}>Nota: {nota}</Text>{btnInserirNota()}
                             <Text style={styles.txtFooter}>Valor: {valor}</Text>
                             <Text style={styles.txtFooter}>Peso: {peso}</Text>
                         </View>
                     </View>
-                </View>}
 
-                {status && <View style={styles.cardAbertoAtividade}>
-                    <View style={styles.bodyCard}>
-                        <Text style={styles.tituloAtividade}>{titulo}</Text>
-                        <Text style={styles.assuntoAtividade}>{assunto}</Text>
-                        <Text style={styles.descricao}>{desc}</Text>
+                    <View style={styles.footerCardA}>
+                        {!status && <View style={[styles.footer, { backgroundColor: getColor(prazo) }]}>
+                            <Text style={styles.prazo}>
+                                Prazo: {dataF} - {diaSem}
+                            </Text>
+                        </View>}
 
-                        <View style={styles.valores}>
-                            {!nota && <Text style={styles.txtFooter}>Nota: 0</Text>}
-                            {nota && <Text style={styles.txtFooter}>Nota: {nota}</Text>}
-                            <Text style={styles.txtFooter}>Valor: {valor}</Text>
-                            <Text style={styles.txtFooter}>Peso: {peso}</Text>
-                        </View>
+                        {status && <View style={styles.footer}>
+                            <Text style={styles.prazo}>
+                                Prazo: {dataF} - {diaSem}
+                            </Text>
+                        </View>}
                     </View>
-                </View>}
-
-                <View style={styles.footerCardA}>
-                    {!status && <View style={[styles.footer, { backgroundColor: getColor(prazo) }]}>
-                        <Text style={styles.prazo}>
-                            Prazo: {dataF} - {diaSem}
-                        </Text>
-                    </View>}
-
-                    {status && <View style={styles.footer}>
-                        <Text style={styles.prazo}>
-                            Prazo: {dataF} - {diaSem}
-                        </Text>
-                    </View>}
-                </View>
+                </TouchableOpacity>
 
                 <View style={styles.botoes}>
-                    {btnInserirNota()}
+                        <TouchableOpacity style={styles.btnAE} onPress={() => navigation.navigate('EditarAtividade', { id: idDisciplina, periodo: periodo, etapa: etapa, idAtividade: idAtividade })}>
+                            <MaterialCommunityIcons name={'pencil-outline'} color="#fff" size={32} />
+                        </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('EditarAtividade', { id: idDisciplina, periodo: periodo, etapa: etapa, idAtividade: idAtividade })}>
-                        <MaterialCommunityIcons name={'pencil-outline'} color="#fff" size={32} />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.btn} onPress={() => removerAtividade()}>
-                        <MaterialCommunityIcons name={'delete-outline'} color="#fff" size={32} />
-                    </TouchableOpacity>
+                        <TouchableOpacity style={styles.btnAE} onPress={() => removerAtividade()}>
+                            <MaterialCommunityIcons name={'delete-outline'} color="#fff" size={32} />
+                        </TouchableOpacity>
+                    
                 </View>
             </View>
 
@@ -249,17 +233,31 @@ export default function Atividades({ navigation, route }) {
         }
     }
 
+    const verificarExistenciaAtv = () =>{
+        if(atividades.length!==0){
+            return <FlatList
+            showsHorizontalScrollIndicator={false}
+            data={atividades}
+            renderItem={({ item }) => (
+                cardAtividade(item.id, item.titulo, item.assunto, item.observacoes, item.valor, item.nota, item.peso, item.prazo, item.status)
+            )}
+            />
+        }else{
+            return <View style={styles.containerAviso}>
+            <View style={styles.aviso}>
+                <Text style={styles.txtAviso}>NENHUMA ATIVIDADE CADASTRADA!</Text>
+            </View>
+            </View>
+        }
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.titulo}>{nomeDisciplina}</Text>
             <Text style={styles.titulo2}>Atividades</Text>
-            <FlatList
-                showsHorizontalScrollIndicator={false}
-                data={atividades}
-                renderItem={({ item }) => (
-                    cardAtividade(item.id, item.titulo, item.assunto, item.observacoes, item.valor, item.nota, item.peso, item.prazo, item.status)
-                )}
-            />
+
+
+            {verificarExistenciaAtv()}
 
             <TouchableOpacity style={styles.btnAdd} onPress={() => navigation.navigate('CadastrarAtividade', { id: idDisciplina, periodo: periodo, etapa: etapa })}>
                 <MaterialCommunityIcons name={'plus'} color="#fff" size={32} />
@@ -288,7 +286,7 @@ export default function Atividades({ navigation, route }) {
                     <View style={styles.cardInserirNota}>
                         <Text style={styles.tituloIncluirNota}>INFORME SUA NOTA:</Text>
                         <TextInput style={styles.input} value={nota} onChangeText={setNota} placeholder="Ex.: 1 ou 1.5"></TextInput>
-                        <TouchableOpacity style={styles.incluirNota} onPress={()=>incluirNota()}>
+                        <TouchableOpacity style={styles.incluirNota} onPress={() => incluirNota()}>
                             <Text style={styles.txtIncluirNota}>Confirmar</Text>
                         </TouchableOpacity>
 

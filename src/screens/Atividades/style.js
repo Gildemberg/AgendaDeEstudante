@@ -28,14 +28,17 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     tituloAtividade: {
-        fontSize: 15,
+        fontSize: 10,
         color: "#fff",
         textAlign: 'center'
     },
     assuntoAtividade: {
         fontSize: 20,
+        fontWeight: 'bold',
         color: "#fff",
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: 15,
+        marginBottom: 15,
     },
     colunas: {
         flexDirection: 'row',
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
     },
     txtFooter: {
         fontSize: 15,
-        color: "#fff",
+        color: "#fff"
     },
     status: {
         color: '#32CD32'
@@ -58,16 +61,11 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 30,
         margin: 10,
         marginBottom: -10,
-        padding: 15,
-        paddingBottom: 0,
         alignSelf: 'center',
-        borderWidth: 2,
-        borderColor: "#32CD32"
-    },
-    bodyCard: {
-        padding: 30
+        padding: 15
     },
     descricao: {
+        fontSize: 15,
         color: "#fff",
         marginBottom: 50,
         marginTop: 30,
@@ -75,7 +73,8 @@ const styles = StyleSheet.create({
     },
     valores: {
         flexDirection: 'row',
-        justifyContent: 'space-around'
+        justifyContent: 'space-between',
+        paddingBottom: 10
     },
     footer: {
         backgroundColor: '#32CD32',
@@ -96,31 +95,27 @@ const styles = StyleSheet.create({
     botoes: {
         flexDirection: 'row',
         alignSelf: 'center',
-        backgroundColor: "#fff",
+        justifyContent: 'space-evenly',
         width: "80%"
     },
-    btn: {
+    btnAE: {
         backgroundColor: "#424242",
-        width: "30%",
-        height: 50,
+        padding: 3,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 10
+        marginTop: 5,
+        marginBottom: 10,
+        width: '40%'
     },
     btnInserir: {
-        backgroundColor: "#32CD32",
-        width: "30%",
-        height: 50,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10,
-        margin: 10,
-        marginLeft: 5
+        position: 'absolute',
+        marginLeft: 35,
+        marginTop: -2,
     },
     txt: {
-        color: "#fff"
+        color: "#fff",
+        fontWeight: 'bold'
     },
 
 
@@ -129,7 +124,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
         justifyContent: 'center',
         alignItems: 'center',
-
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -140,9 +134,9 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     cardInserirNota: {
+        width: '80%',
         backgroundColor: "#d3d3d3",
         borderRadius: 20,
-        width: 500,
         alignItems: 'center',
         padding: 10
     },
@@ -156,13 +150,15 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     input: {
-        width: '30%',
+        width: '50%',
         padding: 15,
-        backgroundColor: "#4F4F4F",
+        backgroundColor: "#d3d3d3",
         borderRadius: 10,
         marginBottom: 10,
-        color: "#fff",
-        fontSize: 20
+        color: "#000",
+        fontSize: 20,
+        borderWidth: 2,
+        borderColor: '#000'
     },
     incluirNota: {
         backgroundColor: "#32CD32",
@@ -214,6 +210,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+
+    containerAviso:{
+        flex: 1,
+        justifyContent: 'center'
+    },
+    aviso:{
+        backgroundColor: 'yellow',
+        padding: 10,
+        margin: 10,
+        marginTop: -100,
+        borderRadius: 10,
+    },
+    txtAviso:{
+        color: '#000',
+        fontSize: 20,
+        textAlign: 'center'
+    }
 });
 
 export default styles;

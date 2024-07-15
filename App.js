@@ -1,6 +1,11 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React, { useState,useEffect } from "react";
+import { View, Text } from "react-native";
+
+import { firebase } from './src/service/firebaseConfig'
+import { initializeAuth, getReactNativePersistence } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, TransitionSpecs, CardStyleInterpolators } from '@react-navigation/stack';
@@ -29,7 +34,30 @@ import Atividades from './src/screens/Atividades';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+
+
+
+
+
+
+
+
 export default function App() {
+  const [initializing, setInitializing] = useState(true);
+
+  useEffect(() => {
+    // Adicione qualquer lógica de inicialização necessária aqui
+    setInitializing(false);
+  }, []);
+
+  if (initializing) {
+    return (
+      <View>
+        <Text>Carregando...</Text>
+      </View>
+    );
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator
