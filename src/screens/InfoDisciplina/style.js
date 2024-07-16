@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        backgroundColor: "#000",
+        backgroundColor: "#EDF2FA",
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -29,12 +29,12 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 0,
     },
     txtDisciplina: {
-        color: '#fff',
+        color: '#2F2E2E',
         fontSize: 30,
         textAlign: 'center'
     },
     txtMedia: {
-        color: '#fff',
+        color: '#2F2E2E',
         fontSize: 20,
         textAlign: 'center'
     },
@@ -46,21 +46,21 @@ const styles = StyleSheet.create({
         height: 50
     },
     btnInfo: {
-        backgroundColor: "#424242",
+        backgroundColor: "#040b26",
         width: '100%',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
     btnAula: {
-        backgroundColor: "#696969",
+        backgroundColor: "#09184D",
         width: '100%',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
     btnAtividade: {
-        backgroundColor: "#696969",
+        backgroundColor: "#09184D",
         width: '100%',
         flex: 1,
         alignItems: 'center',

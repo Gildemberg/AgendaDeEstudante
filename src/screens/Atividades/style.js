@@ -4,23 +4,23 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        backgroundColor: "#000",
+        backgroundColor: "#EDF2FA",
     },
     titulo: {
         fontSize: 15,
-        color: "#fff",
+        color: "#2F2E2E",
         marginBottom: 10,
         marginTop: 60,
         textAlign: 'center'
     },
     titulo2: {
         fontSize: 35,
-        color: "#fff",
+        color: "#2F2E2E",
         marginBottom: 20,
         textAlign: 'center'
     },
     cardAtividade: {
-        backgroundColor: "#424242",
+        backgroundColor: "#09184D",
         width: '80%',
         borderRadius: 30,
         margin: 10,
@@ -55,12 +55,12 @@ const styles = StyleSheet.create({
 
 
     cardAbertoAtividade: {
-        backgroundColor: "#424242",
+        backgroundColor: "#09184D",
         width: '80%',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         margin: 10,
-        marginBottom: -10,
+        marginBottom: -1,
         alignSelf: 'center',
         padding: 15
     },
@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     valores: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingBottom: 10
     },
     footer: {
         backgroundColor: '#32CD32',
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
     prazo: {
         textAlign: 'center',
         fontSize: 20,
-        color: '#000',
+        color: '#fff',
         fontWeight: 'bold'
     },
     botoes: {
@@ -99,12 +98,12 @@ const styles = StyleSheet.create({
         width: "80%"
     },
     btnAE: {
-        backgroundColor: "#424242",
+        backgroundColor: "#09184D",
         padding: 3,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 5,
+        marginTop: 2,
         marginBottom: 10,
         width: '40%'
     },
@@ -172,7 +171,7 @@ const styles = StyleSheet.create({
 
 
     btnAdd: {
-        backgroundColor: "#424242",
+        backgroundColor: "#09184D",
         width: 50,
         height: 50,
         borderRadius: 70,
@@ -190,21 +189,21 @@ const styles = StyleSheet.create({
         height: 50
     },
     btnInfo: {
-        backgroundColor: "#696969",
+        backgroundColor: "#09184D",
         width: '100%',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
     btnAula: {
-        backgroundColor: "#696969",
+        backgroundColor: "#09184D",
         width: '100%',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
     btnAtividade: {
-        backgroundColor: "#424242",
+        backgroundColor: "#040b26",
         width: '100%',
         flex: 1,
         alignItems: 'center',
@@ -216,14 +215,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     aviso:{
-        backgroundColor: 'yellow',
+        backgroundColor: '#09184D',
         padding: 10,
         margin: 10,
         marginTop: -100,
         borderRadius: 10,
     },
     txtAviso:{
-        color: '#000',
+        color: '#fff',
         fontSize: 20,
         textAlign: 'center'
     }

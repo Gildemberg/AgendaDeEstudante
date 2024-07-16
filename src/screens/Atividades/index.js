@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Modal } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Modal, StatusBar } from "react-native";
 import moment from 'moment';
 import 'moment/locale/pt-br';
 moment.locale('pt-br');
@@ -253,6 +253,7 @@ export default function Atividades({ navigation, route }) {
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent backgroundColor="transparent" />
             <Text style={styles.titulo}>{nomeDisciplina}</Text>
             <Text style={styles.titulo2}>Atividades</Text>
 

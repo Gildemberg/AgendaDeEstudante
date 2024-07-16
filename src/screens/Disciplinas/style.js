@@ -4,15 +4,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        backgroundColor: "#000",
+        backgroundColor: "#EDF2FA",
         padding: 10,
-        paddingTop: 60,
         justifyContent: 'center',
     },
     filtro: {
         position: 'absolute',
-        top: 10,
-        right: 30
+        bottom: 50,
+        left: 30
     },
     disciplina: {
         flex: 1,
@@ -33,23 +32,25 @@ const styles = StyleSheet.create({
     },
     txtDisciplina: {
         textAlign: 'center',
-        color: "#fff",
+        color: "#2F2E2E",
         fontSize: 20,
         marginTop: 5
     },
     btnAdd: {
         padding: 10,
-        backgroundColor: "#fff",
+        backgroundColor: "#09184D",
         borderRadius: 1000,
         position: 'absolute',
         bottom: 30,
         right: 30
     },
     modalContent: {
-        backgroundColor: "#4F4F4F",
+        backgroundColor: "#09184D",
         justifyContent: 'center',
-        borderRadius: 4,
-        padding: 10
+        borderRadius: 20,
+        paddingRight: 40,
+        paddingLeft: 40,
+        paddingTop: 20
     },
     select: {
         backgroundColor: "#eee",

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import styles from "./style";
 import { firebase } from '../../service/firebaseConfig'
 import { getDatabase, onValue, query, ref, push, set, remove, get } from "firebase/database";
@@ -26,6 +26,7 @@ export default function Periodos({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent backgroundColor="transparent" />
             <FlatList
                 showsHorizontalScrollIndicator={false}
                 data={periodos}

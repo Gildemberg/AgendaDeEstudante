@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        backgroundColor: "#000",
+        backgroundColor: "#09184D",
         padding: 30,
         justifyContent: 'space-between'
     },
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     titulo: {
-        color: '#fff',
+        color: '#EDF2FA',
         fontSize: 30,
         marginBottom: 40,
         marginTop: 40,
@@ -22,20 +22,20 @@ const styles = StyleSheet.create({
         color: "#fff"
     },
     tituloInput:{
-        color: '#fff',
+        color: '#EDF2FA',
         fontSize: 25,
     },
     input: {
         width: '100%',
         padding: 15,
-        backgroundColor: "#4F4F4F",
+        backgroundColor: "#EDF2FA",
         borderRadius: 10,
         marginBottom: 40,
         color: "#fff",
         fontSize: 20
     },
     select: {
-        backgroundColor: "#4F4F4F",
+        backgroundColor: "#EDF2FA",
         marginBottom: 40,
         color: "#fff",
         fontSize: 40,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         borderColor: "#fff"
     },
     areaImg:{
-        backgroundColor: '#4F4F4F',
+        backgroundColor: '#EDF2FA',
         width: "100%",
         height: 220,
         borderRadius: 15,
@@ -59,10 +59,12 @@ const styles = StyleSheet.create({
     btnSelecionarImg: {
         width: '100%',
         padding: 10,
-        backgroundColor: "#363636",
+        backgroundColor: "#09184D",
         borderRadius: 10,
         marginBottom: 50,
         marginTop: 20,
+        borderWidth: 2,
+        borderColor: "#EDF2FA"
     },
     btnCadastrar: {
         width: '100%',

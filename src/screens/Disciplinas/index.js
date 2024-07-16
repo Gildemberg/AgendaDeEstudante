@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, StatusBar } from "react-native";
 import styles from "./style";
 import { firebase } from '../../service/firebaseConfig'
 import { getDatabase, onValue, query, ref, push, set, remove, get } from "firebase/database";
@@ -95,6 +95,7 @@ export default function Disciplinas({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent backgroundColor="transparent" />
             <Modal
                 isVisible={isModalVisible}
                 backdropOpacity={0.9}
@@ -117,7 +118,6 @@ export default function Disciplinas({ navigation }) {
                         style={styles.select}
                         selectedValue={filtroEtapa}
                         onValueChange={(itemValue, itemIndex) => setFiltroEtapa(itemValue)}>
-                        <Picker.Item label="" value="" />
                         {etapas.map((item) => (
                             <Picker.Item key={item.id} label={`${item.etapas}ª Etapa`} value={item.id} />
                         ))}
@@ -125,12 +125,6 @@ export default function Disciplinas({ navigation }) {
                 </View>
             </Modal>
 
-            <TouchableOpacity
-                style={styles.filtro}
-                onPress={() => setModalVisible(true)}
-            >
-                <MaterialCommunityIcons name={'filter'} color='#fff' size={28} />
-            </TouchableOpacity>
             <FlatList
                 showsHorizontalScrollIndicator={false}
                 data={disciplinas}
@@ -146,7 +140,13 @@ export default function Disciplinas({ navigation }) {
                     </TouchableOpacity>
                 )}
             />
-            <TouchableOpacity style={styles.btnAdd} onPress={() => navigation.navigate('CadastrarDis')}><MaterialCommunityIcons name={'plus'} color='#000' size={40} /></TouchableOpacity>
+            <TouchableOpacity
+                style={styles.filtro}
+                onPress={() => setModalVisible(true)}
+            >
+                <MaterialCommunityIcons name={'filter'} color='#09184D' size={28} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btnAdd} onPress={() => navigation.navigate('CadastrarDis')}><MaterialCommunityIcons name={'plus'} color='#fff' size={40} /></TouchableOpacity>
         </View>
     )
 }

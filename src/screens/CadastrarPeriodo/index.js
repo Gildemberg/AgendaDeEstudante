@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text, TextInput } from "react-native";
+import { View, TouchableOpacity, Text, TextInput, StatusBar } from "react-native";
 import styles from "./style";
 
 import { firebase } from "../../service/firebaseConfig";
@@ -71,6 +71,7 @@ export default function CadastrarPeriodo({ navigation }) {
 
 return (
     <View style={styles.container}>
+        <StatusBar translucent backgroundColor="transparent" />
         <Text style={styles.titulo}>CADASTRO DE DISCIPLINA</Text>
 
         {erro != null && (<Text style={styles.alert}>{erro}</Text>)}

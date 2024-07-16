@@ -4,19 +4,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        backgroundColor: "#000",
+        backgroundColor: "#09184D",
     },
     content: {
         flex: 1,
         width: '100%',
-        backgroundColor: "#000",
+        backgroundColor: "#09184D",
         paddingLeft: 30,
         paddingRight: 30,
         paddingBottom: 30,
     },
     titulo:{
         textAlign: 'center',
-        color:"#fff",
+        color:"#EDF2FA",
         fontSize: 30,
         padding: 30,
         marginTop: 30
@@ -27,15 +27,15 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     tituloInput:{
-        color:"#fff",
+        color:"#EDF2FA",
         fontSize: 25
     },
     input: {
         padding:15,
-        backgroundColor: "#424242",
+        backgroundColor: "#EDF2FA",
         borderRadius:15,
         marginBottom: 30,
-        color: "#fff",
+        color: "#09184D",
         fontSize: 20
     },
     columns:{

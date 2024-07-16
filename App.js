@@ -20,6 +20,7 @@ import CadastrarAula from './src/screens/CadastrarAula';
 import CadastrarAtividade from './src/screens/CadastrarAtividade';
 
 import EditarAtividade from './src/screens/EditarAtividade';
+import EditarAula from './src/screens/EditarAula';
 
 //DRAWERS
 import Disciplinas from './src/screens/Disciplinas';
@@ -46,7 +47,6 @@ export default function App() {
   const [initializing, setInitializing] = useState(true);
 
   useEffect(() => {
-    // Adicione qualquer lógica de inicialização necessária aqui
     setInitializing(false);
   }, []);
 
@@ -88,6 +88,8 @@ export default function App() {
 
         <Stack.Screen name='EditarAtividade' component={EditarAtividade} options={{ headerShown: false }} />
 
+        <Stack.Screen name='EditarAula' component={EditarAula} options={{ headerShown: false }} />
+
         <Stack.Screen name="Drawers" component={Drawers} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -101,11 +103,11 @@ function Drawers() {
                         headerShown: true,
                         headerTintColor: '#FFF',
                         headerTitleAlign: 'center',
-                        headerStyle: { backgroundColor: '#000' },
+                        headerStyle: { backgroundColor: '#09184D' },
                         headerTitleStyle: { fontSize: 40 },
     }}>
 
-      <Drawer.Screen name="Disciplinas" component={Disciplinas} />
+      <Drawer.Screen name="Disciplinas" component={Disciplinas}/>
 
       <Drawer.Screen name="Periodos" component={Periodos} />
 

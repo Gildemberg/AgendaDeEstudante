@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import styles from './style';
 
 import { FlatList } from "react-native-gesture-handler";
@@ -63,14 +63,34 @@ export default function Aulas({ navigation, route }) {
         setObservacoes(observacoes);
     }
 
+    const removerAula = () => {
+        setModalVisivel(false);
+        const url = ref(db, `aula/${auth.currentUser.uid}/${idDisciplina}/${idAula}`);
+        remove(url);
+    }
+
     const cardAula = (id, titulo, assunto, data, observacoes) => {
         if (id === idAula) { //Card Aberto
-            return <TouchableOpacity style={styles.cardAula} onPress={() => setIdAula("")}>
-                <Text style={styles.tituloAula}>{titulo}</Text>
-                <Text style={styles.tituloAula}>{assunto}</Text>
-                <Text style={styles.observacoes}>{observacoes}</Text>
-                <Text style={styles.dataAula}>{data}</Text>
-            </TouchableOpacity>
+            return <View style={styles.container}>
+
+                <TouchableOpacity style={styles.cardAulaAberto} onPress={() => setIdAula("")}>
+                    <Text style={styles.tituloAulaa}>{titulo}</Text>
+                    <Text style={styles.tituloAssunto}>{assunto}</Text>
+                    <Text style={styles.observacoes}>{observacoes}</Text>
+                    <Text style={styles.dataAulaAberto}>{data}</Text>
+                </TouchableOpacity>
+
+                <View style={styles.botoes}>
+                    <TouchableOpacity style={styles.btnAE} onPress={() => navigation.navigate('EditarAula', { id: idDisciplina, periodo: periodo, etapa: etapa, idAula: idAula })}>
+                        <MaterialCommunityIcons name={'pencil-outline'} color="#FFF" size={32} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.btnAE} onPress={() => removerAula()}>
+                        <MaterialCommunityIcons name={'delete-outline'} color="#FFF" size={32} />
+                    </TouchableOpacity>
+
+                </View>
+            </View>
         } else { // Card Fechado
             return <TouchableOpacity style={styles.cardAula} onPress={() => setInfor(id, titulo, assunto, data, observacoes)}>
                 <Text style={styles.tituloAula}>{titulo} - {assunto}</Text>
@@ -99,6 +119,7 @@ export default function Aulas({ navigation, route }) {
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent backgroundColor="transparent" />
             <Text style={styles.titulo}>{nomeDisciplina}</Text>
             <Text style={styles.titulo2}>Aulas</Text>
 

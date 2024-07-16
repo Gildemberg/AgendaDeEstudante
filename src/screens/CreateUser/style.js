@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#D3D3D3",
+        backgroundColor: "#09184D",
         padding: 30,
         flex: 1,
         width: '100%',
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         color: "#fff"
     },
     areaImg:{
-        backgroundColor: '#fff',
+        backgroundColor: '#EDF2FA',
         width: 205,
         height: 205,
         borderRadius: 205,
@@ -29,10 +29,11 @@ const styles = StyleSheet.create({
     input: {
         width: '100%',
         padding:10,
-        backgroundColor: "#fff",
+        backgroundColor: "#EDF2FA",
         borderRadius: 10,
         fontSize: 20,
-        marginBottom: 40
+        marginBottom: 40,
+        color: '#09184D'
     },
     botao: {
         width: '100%',

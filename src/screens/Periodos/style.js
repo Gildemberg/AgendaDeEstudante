@@ -4,14 +4,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        backgroundColor: "#000",
+        backgroundColor: "#EDF2FA",
         padding: 30,
         justifyContent: 'center'
     },
     periodo:{
         padding: 30,
         marginBottom: 10,
-        backgroundColor: "#4F4F4F",
+        backgroundColor: "#09184D",
         borderRadius: 30
     },
     txtPeriodo:{

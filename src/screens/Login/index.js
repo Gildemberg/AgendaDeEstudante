@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, StatusBar, SafeAreaView } from "react-native";
 import styles from "./style";
 import { firebase } from '../../service/firebaseConfig'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -38,7 +38,8 @@ export default function Login({ navigation }) {
     }
     return (
         <View style={styles.container}>
-            <Image style={styles.logo} source={require('../../../assets/icon.png')} />
+            <StatusBar translucent backgroundColor="transparent" />
+            <Image style={styles.logo} source={require('../../../assets/logo.png')} />
 
             {errorLogin != null && (
                 <Text style={styles.alert}>{errorLogin}</Text>
@@ -54,6 +55,7 @@ export default function Login({ navigation }) {
                 placeholder="Senha"
                 value={password}
                 onChangeText={setPassword}
+                secureTextEntry={true}
             />
             <TouchableOpacity
                 style={styles.botao}
@@ -66,8 +68,9 @@ export default function Login({ navigation }) {
                 style={styles.btnCriarConta}
                 onPress={()=> navigation.navigate('CreateUser')}
             >
-                <Text style={styles.txtBotao}>Criar Usuário</Text>                
+                <Text style={styles.txtBotaoCadastrar}>Criar Usuário</Text>                
             </TouchableOpacity>
+            <Text style={styles.by}>By Gildemberg</Text>
         </View>
     )
 };

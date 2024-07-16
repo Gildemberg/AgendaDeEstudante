@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import styles from "./style"
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native';
 
 import { firebase } from '../../service/firebaseConfig'
 import { getDatabase, ref, set } from 'firebase/database'
@@ -86,6 +86,7 @@ export default function CreateUser({navigation}){
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent backgroundColor="transparent" />
             {erro != null && (<Text style={styles.alert}>{erro}</Text>)}
             <View style={styles.areaImg}>
                 <TouchableOpacity style={styles.btnImg} onPress={selecionarImagem}>

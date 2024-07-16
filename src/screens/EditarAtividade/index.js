@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StatusBar } from "react-native";
 import styles from './style';
 
 import moment from 'moment';
@@ -111,6 +111,7 @@ export default function EditarAtividade({ navigation, route }) {
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent backgroundColor="transparent" />
             <Text style={styles.titulo}>EDITAR ATIVIDADE</Text>
             <View style={styles.content}>
                 {erro != null && (<Text style={styles.alert}>{erro}</Text>)}

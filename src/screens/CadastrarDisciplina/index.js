@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text, TextInput, FlatList, Image } from "react-native";
+import { View, TouchableOpacity, Text, TextInput, FlatList, Image, StatusBar } from "react-native";
 import styles from "./style";
 import { Picker } from '@react-native-picker/picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -122,6 +122,7 @@ export default function CadastrarDisciplina({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent backgroundColor="transparent" />
             <View style={styles.content}>
                 <Text style={styles.titulo}>CADASTRO DE DISCIPLINA</Text>
 
@@ -143,7 +144,7 @@ export default function CadastrarDisciplina({ navigation }) {
                 </Picker>
 
                 <View style={styles.areaImg}>
-                    {!image && <MaterialCommunityIcons name={'file-image'} color='#fff' size={60} />}
+                    {!image && <MaterialCommunityIcons name={'file-image'} color='#09184D' size={60} />}
                     {image && <Image source={{ uri: image }} style={styles.imagemSelecionada} />}
                 </View>
 

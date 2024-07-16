@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#000",
+        backgroundColor: "#EDF2FA",
         padding: 30,
         flex: 1,
         width: '100%',
@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     logo :{
-        width: 360,
-        height: 150,
+        width: '100%',
+        height: 210,
         marginBottom: 20
     },
     alert:{
@@ -23,17 +23,18 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         borderRadius: 10,
         fontSize: 20,
-        marginBottom: 40
+        marginBottom: 40,
+        color: '#09184D'
     },
     botao: {
         width: '100%',
         padding: 10,
-        backgroundColor: "#4169E1",
+        backgroundColor: "#09184D",
         borderRadius: 10,
         marginBottom: 10
     },
     txtBotao: {
-        color: '#fff',
+        color: '#EDF2FA',
         textAlign: 'center',
         fontSize: 20
     },
@@ -42,7 +43,16 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         borderWidth: 2,
-        borderColor: "#4169E1",
+        borderColor: "#09184D",
     },
+    txtBotaoCadastrar: {
+        color: '#09184D',
+        textAlign: 'center',
+        fontSize: 20
+    },
+    by:{
+        position: 'absolute',
+        bottom: 10
+    }
 });
 export default styles;

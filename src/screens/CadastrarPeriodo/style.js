@@ -4,12 +4,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        backgroundColor: "#000",
+        backgroundColor: "#09184D",
         padding: 50
     },
     titulo: {
         color: '#fff',
-        fontSize: 40,
+        fontSize: 27,
         marginBottom: 40,
         textAlign: 'center'
     },
@@ -17,39 +17,18 @@ const styles = StyleSheet.create({
         color: "#fff"
     },
     tituloInput:{
-        color: '#fff',
-        fontSize: 40,
+        color: '#EDF2FA',
+        fontSize: 25,
     },
     input: {
         width: '100%',
         padding: 20,
-        backgroundColor: "#4F4F4F",
+        backgroundColor: "#EDF2FA",
         borderRadius: 10,
         fontSize: 20,
         marginBottom: 40,
-        color: "#fff",
-        fontSize: 30
-    },
-    areaImg:{
-        backgroundColor: '#4F4F4F',
-        width: "100%",
-        height: 205,
-        borderRadius: 15,
-        justifyContent: 'center',
-        alignItems: 'center' 
-    },
-    imagemSelecionada: {
-        width: 200,
-        height: 200,
-        borderRadius: 200
-    },
-    btnSelecionarImg: {
-        width: '100%',
-        padding: 10,
-        backgroundColor: "#363636",
-        borderRadius: 10,
-        marginBottom: 50,
-        marginTop: 20,
+        color: "#09184D",
+        fontSize: 20
     },
     btnCadastrar: {
         width: '100%',

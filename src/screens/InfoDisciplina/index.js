@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text, Image } from "react-native";
+import { View, TouchableOpacity, Text, Image, StatusBar } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styles from "./style";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -80,12 +80,13 @@ export default function InfoDisciplina({ navigation, route }) {
                 return <Text style={{color: 'green'}}>{media}</Text>
             }
         }else{
-            return <Text style={{color: '#fff'}}>-</Text>
+            return <Text style={{color: '#2F2E2E'}}>-</Text>
         }
     }
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent backgroundColor="transparent" />
             <View style={styles.areaImagem}>
                 {image ? <Image source={{ uri: image }} style={styles.imagem} /> : null}
             </View>
